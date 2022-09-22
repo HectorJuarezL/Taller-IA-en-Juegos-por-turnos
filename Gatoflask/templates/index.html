@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+  <head>
+
+    <title>
+      Tic Tac Toe
+    </title>
+
+    <link rel="stylesheet" href="static/colors.css">
+    <link rel="stylesheet" href="static/stylish.css">
+
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 class="bigtitle"><span class="blue">Tic</span> Tac <span class="red">Toe</span></h1>
+      <table id="game-grid" class="centered">
+	{% for row in grid %}
+	{% set outer_loop = loop %}
+	<tr>
+	  {% for position in row %}
+	  <td>
+	    {% if position==1 %}
+	    <div class="game-piece-red">
+	    	<img src="static/ttt-x.png" />
+	    </div>
+	    {% elif position==2 %}
+	    <div class="game-piece-blue">
+	    	<img src="static/ttt-o.png" />
+	    </div>
+	    {% else %}
+	    <div class="game-piece-empty">
+	      <form action="" method="post">
+		<button name="play" class="unbutton" type="submit" value="{{outer_loop.index0}},{{loop.index0}}"></button>
+	      </form>
+	    </div>
+	    {% endif %}
+	  </td>
+	  {% endfor %}
+	</tr>
+	{% endfor %}
+      </table>
+      <div class="top-padded">
+	{% if win == 1 %}
+	Cruz gana! 
+	{% elif win == -1 %}
+	Circulo gana! 
+	{% endif %}
+
+	{% if win is not none %}
+	<a href="restart">| Desea jugar de nuevo?</a> |
+	<a href="setup" id="play-again"> Menú de inicio </a>
+	{% endif %}
+      </div>
+    </div>
+  </body>
+
+</html>
